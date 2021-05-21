@@ -1,7 +1,7 @@
 {
   "name": "@nexssp/command",
   "description": "Commands for not only Nexss Programmer",
-  "version": "1.0.1",
+  "version": "1.0.2 ",
   "homepage": "https://nexss.com",
   "main": "src/command.js",
   "bin": {
@@ -32,10 +32,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/nexssp/test.git"
+    "url": "git+ssh://git@github.com/nexssp/command.git"
   },
   "bugs": {
-    "url": "https://github.com/nexssp/test/issues",
+    "url": "https://github.com/nexssp/command/issues",
     "email": "mapoart@gmail.com"
   },
   "license": "MIT",
@@ -51,17 +51,13 @@
   ],
   "dependencies": {
     "@nexssp/ansi": "^1.1.1",
-    "@nexssp/cache": "^2.0.0",
     "@nexssp/config": "^1.0.1",
-    "@nexssp/const": "^1.0.13",
-    "@nexssp/ensure": "^1.0.2",
     "@nexssp/extend": "^1.0.20",
     "@nexssp/logdebug": "^1.0.15",
     "@nexssp/os": "^1.0.31",
     "@nexssp/plugin": "^1.0.1",
-    "@nexssp/system": "^1.0.12",
     "cli-table3": "^0.6.0",
-    "fast-glob": "^3.2.5",
+    "fuzzy": "^0.1.3",
     "inquirer": "^7.0.7",
     "inquirer-autocomplete-prompt": "^1.3.0",
     "minimist": "^1.2.5"

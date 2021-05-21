@@ -1,10 +1,9 @@
-const { NEXSS_PROJECT_CONFIG_PATH } = require('../../config/config');
-const { loadConfigContent } = require('../../lib/config');
-
-const configContent = loadConfigContent(NEXSS_PROJECT_CONFIG_PATH);
-
 function listCommands() {
-  const os = require('@nexssp/os');
+  const NEXSS_PROJECT_CONFIG_PATH = process.env.NEXSS_PROJECT_CONFIG_PATH;
+  const { config1 } = require("../config/config");
+  const configContent = config1.load(NEXSS_PROJECT_CONFIG_PATH);
+  const { green, bold, yellow } = require("@nexssp/ansi");
+  const os = require("@nexssp/os");
   const commands = configContent.commands[process.platform]
     ? configContent.commands[process.platform]
     : configContent.commands;
@@ -18,11 +17,11 @@ function listCommands() {
       `Available predefined commands in _nexss.yml: (usage: nexss command *name*)`
     )
   );
-  const tags = os.tags('command-');
+  const tags = os.tags("command-");
 
-  const Table = require('cli-table3');
+  const Table = require("cli-table3");
   const table = new Table({
-    head: [green('name'), green('command')],
+    head: [green("name"), green("command")],
   });
   if (Array.isArray(commands))
     commands.forEach((cmd) => {

@@ -1,0 +1,67 @@
+{
+  "name": "@nexssp/command",
+  "description": "Commands for not only Nexss Programmer",
+  "version": "1.0.1",
+  "homepage": "https://nexss.com",
+  "main": "src/command.js",
+  "bin": {
+    "nexssp-command": "bin/nexssp-command.js"
+  },
+  "files": [
+    "src/**/*",
+    "bin/*"
+  ],
+  "scripts": {
+    "test1": "node ./bin/nexssp-command.js",
+    "prepare2": "npm run nexss:build",
+    "nexss:build": "npx @nexssp/min@1.0.6",
+    "nexss:clean": ""
+  },
+  "author": {
+    "name": "Marcin Polak",
+    "email": "mapoart@gmail.com",
+    "url": "https://nexss.com"
+  },
+  "keywords": [
+    "programming",
+    "programmer",
+    "commands",
+    "helper",
+    "nexss"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/nexssp/test.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nexssp/test/issues",
+    "email": "mapoart@gmail.com"
+  },
+  "license": "MIT",
+  "funding": [
+    {
+      "type": "paypal",
+      "url": "https://www.paypal.com/paypalme/mapoart"
+    },
+    {
+      "type": "github",
+      "url": "https://github.com/nexssp/cli?sponsor=1"
+    }
+  ],
+  "dependencies": {
+    "@nexssp/ansi": "^1.1.1",
+    "@nexssp/cache": "^2.0.0",
+    "@nexssp/const": "^1.0.13",
+    "@nexssp/ensure": "^1.0.2",
+    "@nexssp/extend": "^1.0.20",
+    "@nexssp/logdebug": "^1.0.15",
+    "@nexssp/os": "^1.0.31",
+    "@nexssp/system": "^1.0.12",
+    "cli-table3": "^0.6.0",
+    "fast-glob": "^3.2.5",
+    "inquirer": "^7.0.7",
+    "inquirer-autocomplete-prompt": "^1.3.0",
+    "minimist": "^1.2.5"
+  },
+  "devDependencies": {}
+}

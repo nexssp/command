@@ -51,8 +51,8 @@
   ],
   "dependencies": {
     "@nexssp/ansi": "^1.1.1",
-    "@nexssp/config": "^1.0.1",
-    "@nexssp/extend": "^1.0.20",
+    "@nexssp/config": "^1.0.2",
+    "@nexssp/extend": "^1.0.21",
     "@nexssp/logdebug": "^1.0.15",
     "@nexssp/os": "^1.0.31",
     "@nexssp/plugin": "^1.0.1",

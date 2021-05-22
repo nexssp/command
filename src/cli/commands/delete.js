@@ -1,4 +1,4 @@
-module.exports = () => {
+module.exports = (cmd, args) => {
   const { searchData } = require('../../lib/search')
   const { NEXSS_PROJECT_CONFIG_PATH } = require('../../config/config')
   const { config1 } = require('../../config/config')

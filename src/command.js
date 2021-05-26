@@ -1,4 +1,4 @@
-"use strict";
+'use strict'
 /* eslint-disable space-before-function-paren, comma-dangle */
 
 /**
@@ -13,20 +13,20 @@
  */
 
 function nexssCommand({ progress } = {}) {
-  let _fs;
-  let _path;
-  let _log;
+  let _fs
+  let _path
+  let _log
 
-  const _progress = progress;
-  const { bold, red, yellow, green } = require("@nexssp/ansi");
+  const _progress = progress
+  const { bold, red, yellow, green } = require('@nexssp/ansi')
 
   const start = () => {
-    _fs = require("fs");
-    _path = require("path");
-    _log = require("@nexssp/logdebug");
+    _fs = require('fs')
+    _path = require('path')
+    _log = require('@nexssp/logdebug')
 
-    return true;
-  };
+    return true
+  }
 
   function exists(name) {
     //check if command exists
@@ -39,7 +39,7 @@ function nexssCommand({ progress } = {}) {
   return {
     run,
     start,
-  };
+  }
 }
 
-module.exports = nexssCommand;
+module.exports = nexssCommand

@@ -1,5 +1,5 @@
-const nexssConfig = require("@nexssp/config");
+const nexssConfig = require('@nexssp/config')
 
-const config1 = nexssConfig({ type: "yaml" });
+const config1 = nexssConfig({ type: 'yaml' })
 
-module.exports = { config1 };
+module.exports = { config1 }

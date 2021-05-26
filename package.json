@@ -13,7 +13,7 @@
     "aliases.json"
   ],
   "scripts": {
-    "test1": "node ./bin/nexssp-command.js",
+    "test": "nexssp-test --debug",
     "prepare2": "npm run nexss:build",
     "nexss:build": "npx @nexssp/min@1.0.6",
     "nexss:clean": ""
@@ -55,12 +55,15 @@
     "@nexssp/extend": "^1.0.21",
     "@nexssp/logdebug": "^1.0.15",
     "@nexssp/os": "^1.0.31",
-    "@nexssp/plugin": "^1.0.1",
+    "@nexssp/plugin": "^1.0.5",
+    "@nexssp/system": "^1.1.5",
     "cli-table3": "^0.6.0",
     "fuzzy": "^0.1.3",
     "inquirer": "^7.0.7",
     "inquirer-autocomplete-prompt": "^1.3.0",
     "minimist": "^1.2.5"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@nexssp/test": "^1.1.1"
+  }
 }

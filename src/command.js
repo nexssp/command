@@ -163,7 +163,7 @@ function nexssCommand({ progress } = {}) {
     const CommandToRun = existsInConfig(name, { platform })
 
     if (!CommandToRun) {
-      _log.error('Command not found')
+      _log.error(`Command '${name}' not found`)
       process.exit(1)
     }
 
@@ -234,6 +234,10 @@ function nexssCommand({ progress } = {}) {
       return findByProp(currentCommands, platform, 'name', name)
     } else if (!exact && findByProp(currentCommands, 'all', 'name', name)) {
       return findByProp(currentCommands, 'all', 'name', name)
+    } else {
+      // console.log('Trying to load legacy commands')
+      const config = config1.load()
+      return config && config.commands && findByProp(config, 'commands', 'name', name)
     }
   }
 

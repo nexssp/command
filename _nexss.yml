@@ -1,5 +1,4 @@
 commands:
   all:
     - name: mycommand
-      command:
-        - echo 'my command works.'
+      command: echo 'my command works.'

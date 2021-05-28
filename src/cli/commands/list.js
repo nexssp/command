@@ -1,29 +1,29 @@
-module.exports = () => {
+module.exports = (cmd, args) => {
+  const _log = require('@nexssp/logdebug')
   const { bold, yellow, green } = require('@nexssp/ansi')
-  const NEXSS_PROJECT_CONFIG_PATH = process.env.NEXSS_PROJECT_CONFIG_PATH
+  const cliArgs = require('../../config/args')
+
+  const os = require('@nexssp/os/legacy')
+
+  const { command1 } = require('../../config/command')
+
+  const platform = cliArgs.platform || process.platform
+  _log.dc(`@command @list: platform: ${cliArgs.platform}`)
+
   const { config1 } = require('../../config/config')
-  let configContent = config1.load(NEXSS_PROJECT_CONFIG_PATH)
-
-  if (!configContent) {
-    console.log(yellow(`No config _nexss.yml found. Create new _nexss.yml by adding new command.`))
-    return true
+  let commands = command1.list(platform)
+  const configPath = config1.getPath()
+  console.log('Config Path: ', configPath ? bold(configPath) : 'no config has been found.')
+  const { isEmpty } = require('@nexssp/data')
+  if (isEmpty(commands)) {
+    _log.warn('No commands found')
+  } else {
+    Object.keys(commands).forEach((platform) => {
+      console.log('PLATFORM: ', green(platform))
+      console
+      commands[platform].map((e) =>
+        console.log(`${bold(e.name)} - ${yellow(bold(os.replacePMByDistro(e.command)))}`)
+      )
+    })
   }
-
-  // There is platform specific commands. We use
-  if (configContent.commands[process.platform]) {
-    configContent.commands = configContent.commands[process.platform]
-  }
-
-  const { commands } = configContent
-
-  if (!commands) {
-    console.log(yellow(`No available commands. (use eg. nexss cmd add *name* ls -l)`))
-    return
-  }
-  console.log(green(`Available predefined commands in _nexss.yml: (usage: nexss cmd *name*)`))
-  const os = require('@nexssp/os')
-  commands.map((e) =>
-    console.log(`${bold(e.name)} - ${yellow(bold(os.replacePMByDistro(e.command)))}`)
-  )
-  return true
 }

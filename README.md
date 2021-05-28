@@ -1,10 +1,36 @@
 # @nexssp/command
 
-Easy repetable shell commands... just to save time.. also OS dependent depended. _**See advanced examples below..**_
+Easy repetable shell commands... just to save time.. for mulitpleOSes
+_**See examples below..**_
 
 ## Note
 
 This Nexss Programmer's plugin is the effect of the refactoring the Nexss Programmer **@nexssp/cli** which development has been started in 2018. Now this module can be also used **_as separate program_** without the Nexss Programmer.
+
+_You can do very easy backup of your commands and share as files are \*.yml format._
+
+## Example
+
+```sh
+# adds command to the current folder config file
+nexssp-command add npmup "npm version patch && git push && npm publish"
+
+# adds to the global commands
+nexssp-command add npmup "npm version patch && git push && npm publish" -g
+
+# adds to the global commands for platform linux
+nexssp-command add npmup "npm version patch && git push && npm publish" --plaform=linux -g
+
+# it automatically recognizes platforms
+nexssp-command npmup # runs command
+nexssp-command npmup -g # runs global command
+
+nexssp-command list # list commands
+nexssp-command list # list global commands
+
+nexssp-command delete npmup # delete command
+nexssp-command delete npmup -g # delete global command
+```
 
 ## Install
 
@@ -76,3 +102,9 @@ commands:
     - name: init
       command: brew install xpdf
 ```
+
+## Where commands are stored?
+
+There are 2 kinds of commands. Global and local. Global are stored in your home directory. `~/.nexss/_nexss_global.yml` on Linux and `C:\Users\USER\.nexss\_nexss.yml`. Local are stored in the current folder or the first parent folder which contains `_nexss.yml` file
+
+You can specify _custom global file_ by `--global=myfilename`

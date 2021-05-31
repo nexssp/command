@@ -1,5 +1,6 @@
 const nexssCommand = require('../../')
 
-const command1 = nexssCommand()
+const { config1 } = require('./config')
+const command1 = nexssCommand({ config: config1 })
 
 module.exports = { command1 }

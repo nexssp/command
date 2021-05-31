@@ -14,7 +14,7 @@ const { ddd, ddc } = require('@nexssp/dddebug')
  * @param {string} progress - It will show progress of the installations eg. git
  */
 
-function nexssCommand({ progress, quiet } = {}) {
+function nexssCommand({ config, progress, quiet } = {}) {
   let _fs
   let _path
   const _log = require('@nexssp/logdebug')
@@ -22,8 +22,7 @@ function nexssCommand({ progress, quiet } = {}) {
   const _progress = progress
   const { bold, red, yellow, green, magenta, blue } = require('@nexssp/ansi')
 
-  const { config1 } = require('./config/config')
-  let configContent = config1.load()
+  let configContent = config.load()
   if (!configContent) {
     configContent = {}
   }
@@ -119,7 +118,7 @@ function nexssCommand({ progress, quiet } = {}) {
       }
       if (!quiet)
         _log.warn(
-          `Command '${name}' is already in the config ${config1.getPath()}${platformMessage}`
+          `Command '${name}' is already in the config ${config.getPath()}${platformMessage}`
         )
       return
     } else {
@@ -129,7 +128,7 @@ function nexssCommand({ progress, quiet } = {}) {
 
       configContent.commands[platform].push({ name, command: commandToAdd })
 
-      config1.save(configContent)
+      config.save(configContent)
       if (!quiet) _log.success('Done..')
       return true
     }
@@ -142,7 +141,7 @@ function nexssCommand({ progress, quiet } = {}) {
         platformMessage += ` for the platform: ${platform}`
       }
       if (!quiet)
-        _log.warn(`Command '${name}' does not exists in the ${config1.getPath()}${platformMessage}`)
+        _log.warn(`Command '${name}' does not exists in the ${config.getPath()}${platformMessage}`)
       return
     } else {
       const { deleteByProp } = require('@nexssp/extend/object')
@@ -157,7 +156,7 @@ function nexssCommand({ progress, quiet } = {}) {
         delete configContent['commands']
       }
 
-      config1.save(configContent)
+      config.save(configContent)
       if (!quiet) _log.success('Done..', 'DELETED: ', deletedCommand)
       return true
     }
@@ -240,8 +239,12 @@ function nexssCommand({ progress, quiet } = {}) {
       return findByProp(currentCommands, 'all', 'name', name)
     } else {
       // console.log('Trying to load legacy commands')
-      const config = config1.load()
-      return config && config.commands && findByProp(config, 'commands', 'name', name)
+      const configContentTemp = config.load()
+      return (
+        configContentTemp &&
+        configContentTemp.commands &&
+        findByProp(configContentTemp, 'commands', 'name', name)
+      )
     }
   }
 

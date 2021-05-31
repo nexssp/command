@@ -53,16 +53,16 @@
   "dependencies": {
     "@nexssp/ansi": "^1.1.1",
     "@nexssp/config": "^1.0.7",
-    "@nexssp/data": "^1.0.4",
+    "@nexssp/data": "^1.0.5",
+    "@nexssp/dddebug": "^1.0.7",
     "@nexssp/extend": "^2.0.3",
     "@nexssp/logdebug": "^1.0.18",
     "@nexssp/os": "^2.0.17",
     "@nexssp/plugin": "^1.0.5",
-    "@nexssp/system": "^1.1.5",
+    "@nexssp/system": "^1.1.6",
     "minimist": "^1.2.5"
   },
   "devDependencies": {
-    "@nexssp/dddebug": "^1.0.7",
-    "@nexssp/test": "^1.1.2"
+    "@nexssp/test": "^1.1.4"
   }
 }

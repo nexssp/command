@@ -14,7 +14,7 @@ const { ddd, ddc } = require('@nexssp/dddebug')
  * @param {string} progress - It will show progress of the installations eg. git
  */
 
-function nexssCommand({ progress } = {}) {
+function nexssCommand({ progress, quiet } = {}) {
   let _fs
   let _path
   const _log = require('@nexssp/logdebug')
@@ -117,7 +117,10 @@ function nexssCommand({ progress } = {}) {
       if (platform) {
         platformMessage += ` for the platform: ${platform}`
       }
-      _log.warn(`Command '${name}' is already in the config ${config1.getPath()}${platformMessage}`)
+      if (!quiet)
+        _log.warn(
+          `Command '${name}' is already in the config ${config1.getPath()}${platformMessage}`
+        )
       return
     } else {
       if (!configContent.commands[platform]) {
@@ -127,7 +130,7 @@ function nexssCommand({ progress } = {}) {
       configContent.commands[platform].push({ name, command: commandToAdd })
 
       config1.save(configContent)
-      _log.success('Done..')
+      if (!quiet) _log.success('Done..')
       return true
     }
   }
@@ -138,7 +141,8 @@ function nexssCommand({ progress } = {}) {
       if (platform) {
         platformMessage += ` for the platform: ${platform}`
       }
-      _log.warn(`Command '${name}' does not exists in the ${config1.getPath()}${platformMessage}`)
+      if (!quiet)
+        _log.warn(`Command '${name}' does not exists in the ${config1.getPath()}${platformMessage}`)
       return
     } else {
       const { deleteByProp } = require('@nexssp/extend/object')
@@ -154,7 +158,7 @@ function nexssCommand({ progress } = {}) {
       }
 
       config1.save(configContent)
-      _log.success('Done..', 'DELETED: ', deletedCommand)
+      if (!quiet) _log.success('Done..', 'DELETED: ', deletedCommand)
       return true
     }
   }
@@ -163,7 +167,7 @@ function nexssCommand({ progress } = {}) {
     const CommandToRun = existsInConfig(name, { platform })
 
     if (!CommandToRun) {
-      _log.error(`Command '${name}' not found`)
+      if (!quiet) _log.error(`Command '${name}' not found`)
       process.exit(1)
     }
 

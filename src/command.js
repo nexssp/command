@@ -1,6 +1,7 @@
 'use strict'
 
 const { ddd, ddc } = require('@nexssp/dddebug')
+const { nSpawn } = require('@nexssp/system')
 
 /* eslint-disable space-before-function-paren, comma-dangle */
 /**
@@ -202,37 +203,43 @@ function nexssCommand({ config, progress, quiet } = {}) {
     if (!commandFinal) {
       throw new Error(`Command not found ${name} for platform: ${platform}`)
     }
+    try {
+      _log.info(`Run command ${bold(name)}: ${yellow(bold(commandFinal))}`)
+      nSpawn(commandFinal, { stdio: 'inherit' })
+    } catch (e) {
+      console.log(e)
+    }
 
-    const { exec } = require('child_process')
-    const sp = exec(commandFinal, {
-      stdio: ['inherit', 'pipe', 'pipe'],
-      shell: process.shell,
-    })
+    // const { exec } = require('child_process')
+    // const sp = exec(commandFinal, {
+    //   stdio: ['inherit', 'pipe', 'pipe'],
+    //   shell: process.shell,
+    // })
 
-    sp.stdout.on('data', (data) => {
-      process.stdout.write(data.toString())
-    })
+    // sp.stdout.on('data', (data) => {
+    //   process.stdout.write(data.toString())
+    // })
 
-    let errorString = ''
-    sp.stderr.on('data', (data) => {
-      errorString += data.toString()
-    })
-    sp.stderr.on('end', () => {
-      if (errorString) {
-        if (errorString.indexOf('No repository field') > -1) {
-          console.log(blue(`NOTE: Please put repository name in the package.json`))
-        } else {
-          console.error(red(bold('Error in commands:\n')))
-          console.error(bold(magenta(errorString)))
-          console.error(
-            `Command ${bold(red(name))} with issue: `,
-            bold(blue(require('util').inspect(commandFinal)))
-          )
-          console.error(`All commands available..`)
-          console.error(bold(yellow(require('util').inspect(configContent.commands))))
-        }
-      }
-    })
+    // let errorString = ''
+    // sp.stderr.on('data', (data) => {
+    //   errorString += data.toString()
+    // })
+    // sp.stderr.on('end', () => {
+    //   if (errorString) {
+    //     if (errorString.indexOf('No repository field') > -1) {
+    //       console.log(blue(`NOTE: Please put repository name in the package.json`))
+    //     } else {
+    //       console.error(red(bold('Error in commands:\n')))
+    //       console.error(bold(magenta(errorString)))
+    //       console.error(
+    //         `Command ${bold(red(name))} with issue: `,
+    //         bold(blue(require('util').inspect(commandFinal)))
+    //       )
+    //       console.error(`All commands available..`)
+    //       console.error(bold(yellow(require('util').inspect(configContent.commands))))
+    //     }
+    //   }
+    // })
   }
 
   function existsInConfig(name, { platform, exact } = {}) {

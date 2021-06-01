@@ -1,7 +1,7 @@
 {
   "name": "@nexssp/command",
   "description": "Commands for not only Nexss Programmer",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "homepage": "https://nexss.com",
   "main": "src/command.js",
   "bin": {

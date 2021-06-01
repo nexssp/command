@@ -183,13 +183,13 @@ function nexssCommand({ config, progress, quiet } = {}) {
       if (CommandToRun[`${tags[0]}`]) {
         // For distributions we replace apt-get install/update/remove to the correct ones distributions eg. yum,zypper,dnf etc etc..
         // Users can write only apt-get install and everything else will be replaced..
-        commandFinal = os.replacePMByDistro(CommandToRun[`${tags[0]}`])
+        commandFinal = os1.replacePMByDistro(CommandToRun[`${tags[0]}`])
       } else if (CommandToRun[`${tags[1]}`]) {
-        commandFinal = os.replacePMByDistro(CommandToRun[`${tags[1]}`])
+        commandFinal = os1.replacePMByDistro(CommandToRun[`${tags[1]}`])
       } else if (CommandToRun[`${tags[2]}`]) {
-        commandFinal = os.replacePMByDistro(CommandToRun[`${tags[2]}`])
+        commandFinal = os1.replacePMByDistro(CommandToRun[`${tags[2]}`])
       } else {
-        commandFinal = os.replacePMByDistro(CommandToRun.command)
+        commandFinal = os1.replacePMByDistro(CommandToRun.command)
       }
     }
 

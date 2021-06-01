@@ -39,6 +39,7 @@ function nexssCommand({ config, progress, quiet } = {}) {
   }
 
   function add(commandName, args, { filter, platform } = {}) {
+    if (!platform) platform = process.platform
     if (Array.isArray(filter)) {
       filter = [filter]
     }
@@ -110,16 +111,15 @@ function nexssCommand({ config, progress, quiet } = {}) {
     return commands
   }
 
-  function addToConfig(name, commandToAdd, { platform }) {
+  function addToConfig(name, commandToAdd, { platform } = {}) {
+    if (!platform) platform = process.platform
     if (existsInConfig(name, { platform, exact: true })) {
       let platformMessage = ''
       if (platform) {
         platformMessage += ` for the platform: ${platform}`
       }
-      if (!quiet)
-        _log.warn(
-          `Command '${name}' is already in the config ${config.getPath()}${platformMessage}`
-        )
+      _log.warn(`Command '${name}' is already in the config ${config.getPath()}${platformMessage}`)
+
       return
     } else {
       if (!configContent.commands[platform]) {
@@ -134,7 +134,8 @@ function nexssCommand({ config, progress, quiet } = {}) {
     }
   }
 
-  function deleteFromConfig(name, { platform }) {
+  function deleteFromConfig(name, { platform } = {}) {
+    if (!platform) platform = process.platform
     if (!existsInConfig(name, { platform })) {
       let platformMessage = ''
       if (platform) {
@@ -162,18 +163,22 @@ function nexssCommand({ config, progress, quiet } = {}) {
     }
   }
 
-  function get(name, { platform, distroTags }) {
+  function get(name, { platform, distroTags } = {}) {
+    if (!platform) platform = process.platform
     const CommandToRun = existsInConfig(name, { platform })
 
     if (!CommandToRun) {
-      if (!quiet) _log.error(`Command '${name}' not found`)
-      process.exit(1)
+      if (!quiet) {
+        _log.warn(`Command '${name}' not found`)
+        process.exit(1)
+      }
+      return
     }
 
     let commandFinal = CommandToRun.command
     if (process.platform !== 'win32') {
       const { os1 } = require('./config/os-config')
-      const tags = os1.getTags(null, null, 'command-')
+      const tags = distroTags || os1.getTags(null, null, 'command-')
       if (CommandToRun[`${tags[0]}`]) {
         // For distributions we replace apt-get install/update/remove to the correct ones distributions eg. yum,zypper,dnf etc etc..
         // Users can write only apt-get install and everything else will be replaced..
@@ -190,8 +195,9 @@ function nexssCommand({ config, progress, quiet } = {}) {
     return commandFinal
   }
 
-  function run(name, { platform, distroTag }) {
-    const commandFinal = get(name, { platform, distroTag })
+  function run(name, { platform, distroTags } = {}) {
+    if (!platform) platform = process.platform
+    const commandFinal = get(name, { platform, distroTags })
 
     if (!commandFinal) {
       throw new Error(`Command not found ${name} for platform: ${platform}`)
@@ -230,6 +236,7 @@ function nexssCommand({ config, progress, quiet } = {}) {
   }
 
   function existsInConfig(name, { platform, exact } = {}) {
+    if (!platform) platform = process.platform
     const { findByProp } = require('@nexssp/extend/object')
     const currentCommands = list(platform)
     if (!currentCommands) return false
@@ -251,6 +258,7 @@ function nexssCommand({ config, progress, quiet } = {}) {
   const { applyTracker } = require('@nexssp/logdebug/tracker')
   return applyTracker({
     run,
+    get,
     start,
     add,
     list,

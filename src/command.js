@@ -196,7 +196,7 @@ function nexssCommand({ config, progress, quiet } = {}) {
     return commandFinal
   }
 
-  function run(name, { platform, distroTags } = {}) {
+  function run(name, { platform, distroTags, cwd } = {}) {
     if (!platform) platform = process.platform
     const commandFinal = get(name, { platform, distroTags })
 
@@ -204,8 +204,10 @@ function nexssCommand({ config, progress, quiet } = {}) {
       throw new Error(`Command not found ${name} for platform: ${platform}`)
     }
     try {
-      _log.info(`Run command ${bold(name)}: ${yellow(bold(commandFinal))}`)
-      nSpawn(commandFinal, { stdio: 'inherit' })
+      _log.info(
+        `Run command ${bold(name)}: ${yellow(bold(commandFinal))}, cwd: ${cwd || process.cwd()}`
+      )
+      nSpawn(commandFinal, { stdio: 'inherit', cwd })
     } catch (e) {
       console.log(e)
     }

@@ -3,7 +3,10 @@
   "description": "Commands for not only Nexss Programmer",
   "version": "1.0.14",
   "homepage": "https://nexss.com",
-  "main": "src/command.js",
+  "exports": {
+    "import": "./index.mjs",
+    "require": "./index.js"
+  },
   "bin": {
     "nexssp-command": "bin/nexssp-command.js"
   },
@@ -14,9 +17,7 @@
   ],
   "scripts": {
     "dev": "npm run env LOGDEBUG_FUNCTION_TRACKER=true -- node bin/nexssp-command.js add mycommand echo 'my command works.' --debug:diff",
-    "test": "nexssp-test --debug",
-    "prepare2": "npm run nexss:build",
-    "nexss:build": "npx @nexssp/min@1.0.6",
+    "test": "npx @nexssp/test --debug",
     "nexss:clean": ""
   },
   "author": {
@@ -29,7 +30,8 @@
     "programmer",
     "commands",
     "helper",
-    "nexss"
+    "nexss",
+    "nexss programmer"
   ],
   "repository": {
     "type": "git",
@@ -51,18 +53,16 @@
     }
   ],
   "dependencies": {
-    "@nexssp/ansi": "^1.1.1",
-    "@nexssp/config": "^1.0.7",
+    "@nexssp/ansi": "^1.1.5",
+    "@nexssp/config": "^1.0.9",
     "@nexssp/data": "^1.0.5",
     "@nexssp/dddebug": "^1.0.7",
-    "@nexssp/extend": "^2.0.3",
-    "@nexssp/logdebug": "^1.0.18",
-    "@nexssp/os": "^2.0.17",
-    "@nexssp/plugin": "^1.0.5",
-    "@nexssp/system": "^1.1.6",
+    "@nexssp/extend": "^2.0.9",
+    "@nexssp/logdebug": "^1.0.20",
+    "@nexssp/os": "^2.0.21",
+    "@nexssp/plugin": "^1.0.7",
+    "@nexssp/system": "^1.1.9",
+    "@nexssp/test": "^1.1.12",
     "minimist": "^1.2.5"
-  },
-  "devDependencies": {
-    "@nexssp/test": "^1.1.4"
   }
 }

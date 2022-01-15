@@ -1,5 +1,7 @@
 # @nexssp/command
 
+**15.01.2022 Upgrade** - Now works also with `import` as module.
+
 Easy repetable shell commands... just to save time.. for mulitpleOSes
 _**See examples below..**_
 
@@ -105,6 +107,14 @@ commands:
 
 ## Where commands are stored?
 
-There are 2 kinds of commands. Global and local. Global are stored in your home directory. `~/.nexss/_nexss_global.yml` on Linux and `C:\Users\USER\.nexss\_nexss.yml`. Local are stored in the current folder or the first parent folder which contains `_nexss.yml` file
+There are 2 kinds of commands. Global and local.
+
+### Global commands
+
+Global commands are stored in your home directory. `~/.nexss/_nexss_global.yml` on Linux and `C:\Users\USER\.nexss\_nexss_global.yml`.
+
+### Local commands
+
+Local are stored in the current folder or the first parent folder which contains `_nexss.yml` file
 
 You can specify _custom global file_ by `--global=myfilename`

@@ -13,6 +13,8 @@
   "files": [
     "src/**/*",
     "bin/*",
+    "index.js",
+    "index.mjs",
     "aliases.json"
   ],
   "scripts": {
